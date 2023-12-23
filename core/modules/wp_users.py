@@ -30,7 +30,7 @@ class WPUser:
 				user = json.loads(html,"utf-8")
 				for x in range(len(user)):
 					self.users.append(user[x]["name"])
-		except Exception,e:
+		except Exception:
 			pass
 
 	def wpauthor(self):
@@ -47,7 +47,7 @@ class WPUser:
 					self.users.extend(user)
 				if user_:
 					self.users.extend(user_)
-			except Exception,e:
+			except Exception:
 				pass
 
 	def wpfeed(self):
@@ -60,11 +60,11 @@ class WPUser:
 			user = re.findall('<dc:creator><!\[CDATA\[(.+?)\]\]></dc:creator>',html)
 			if user:
 				self.users.extend(user)
-		except Exception,e:
+		except Exception:
 			pass
 
 	def init(self):
-		print ""
+		print("")
 		self.print_.aprint("Enumerating usernames...")
 		self.wpjson()
 		self.wpauthor()
@@ -76,7 +76,7 @@ class WPUser:
 		if users != []:
 			for z in range(len(users)):
 				self.print_.dprint(u"ID: {} - Name: {}".format(z,users[z]))
-			print ""
+			print("")
 		elif users == []:
 			self.print_.eprint("Not found users ")
 

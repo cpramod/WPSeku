@@ -28,7 +28,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url) 
 			if html and code == 405:
 				self.print_.aprint("XML-RPC Interface available under: {}".format(uri))
-		except Exception,e:
+		except Exception:
 			pass 
 
 	def robots(self):
@@ -39,8 +39,8 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url)
 			if html and code == 200:
 				self.print_.aprint("Robots available under: {}".format(uri))
-				print "\r\n%s\n"%(html)
-		except Exception,e:
+				print("\r\n%s\n"%(html))
+		except Exception:
 			pass
 
 	def sitemap(self):
@@ -51,7 +51,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url)
 			if html and code == 200:
 				self.print_.aprint("Sitemap available under: {}".format(uri))
-		except Exception,e:
+		except Exception:
 			pass
 
 	def readme(self):
@@ -62,7 +62,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url)
 			if html and code == 200:
 				self.print_.aprint("Readme available under: {}".format(uri))
-		except Exception,e:
+		except Exception:
 			pass 
 
 	def fullpathdisc(self):
@@ -74,7 +74,7 @@ class WPGeneric:
 			if html and code == 200:
 				if re.search('Fatal error',html):
 					self.print_.bprint("Full Path Disclosure: {}".format(uri))
-		except Exception,e:
+		except Exception:
 			pass
 
 	def version(self):
@@ -91,7 +91,7 @@ class WPGeneric:
 				self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 				# Check wordpress version vulns
 				self.wpvulns(vers)
-		except Exception,e:
+		except Exception:
 			try:
 				# check wordpress version via feed
 				url = self.check_.check(self.url,"feed")
@@ -103,7 +103,7 @@ class WPGeneric:
 					self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 					# Check wordpress version vulns
 					self.wpvulns(vers)
-			except Exception,e:
+			except Exception:
 				try:
 					# check wordpress version via feed/atom
 					url = self.check_.check(self.url,"/feed/atom")
@@ -115,7 +115,7 @@ class WPGeneric:
 						self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 						# Check wordpress version vulns
 						self.wpvulns(vers)
-				except Exception,e:
+				except Exception:
 					try:
 						# check wordpress version via feed/rdf
 						url = self.check_.check(self.url,"feed/rdf")
@@ -127,7 +127,7 @@ class WPGeneric:
 							self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 							# Check wordpress version vulns
 							self.wpvulns(vers)
-					except Exception,e:
+					except Exception:
 						try:
 							# check wordpress version via comments/feed
 							url = self.check_.check(self.url,"comments/feed")
@@ -139,7 +139,7 @@ class WPGeneric:
 								self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 								# Check wordpress version vulns
 								self.wpvulns(vers)
-						except Exception,e:
+						except Exception:
 							try:
 								# check wordpress version via readme.html file
 								url = self.check_.check(self.url,"readme.html")
@@ -151,7 +151,7 @@ class WPGeneric:
 									self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 									# Check wordpress version vulns
 									self.wpvulns(vers)
-							except Exception,e:
+							except Exception:
 								try:
 									# check wordpress version via meta generator
 									url = self.check_.check(self.url,"")
@@ -163,7 +163,7 @@ class WPGeneric:
 										self.print_.aprint("Running WordPress version: %s"%(vers[0]))
 										# Check wordpress version vulns
 										self.wpvulns(vers)
-								except Exception,e:
+								except Exception:
 									self.print_.aprint("Not found run WordPress version")
 
 	def headers(self):
@@ -173,36 +173,36 @@ class WPGeneric:
 		url = self.check_.check(self.url,"")
 		# return html,url,code and info
 		html,uri,code,info = self.req.Send(url)
-		print ""
+		print("")
 		if info.getheader('content-encoding'):
-			print "Content-Encoding: {}".format(info.getheader('content-encoding'))
+			print("Content-Encoding: {}".format(info.getheader('content-encoding')))
 		if info.getheader('content-length'):
-			print "Content-Length: {}".format(info.getheader('content-length'))
+			print("Content-Length: {}".format(info.getheader('content-length')))
 		if info.getheader('connection'):
-			print "Connection: {}".format(info.getheader('connection'))
+			print("Connection: {}".format(info.getheader('connection')))
 		if info.getheader('content-type'):
-			print "Content-Type: {}".format(info.getheader('content-type'))
+			print("Content-Type: {}".format(info.getheader('content-type')))
 		if info.getheader('cache-control'):
-			print "Cache-Control: {}".format(info.getheader('cache-control'))
+			print("Cache-Control: {}".format(info.getheader('cache-control')))
 		if info.getheader('server'):
-			print "Server: {}".format(info.getheader('server'))
+			print("Server: {}".format(info.getheader('server')))
 		if info.getheader('keep-alive'):
-			print "Keep-Alive: {}".format(info.getheader('keep-alive'))
+			print("Keep-Alive: {}".format(info.getheader('keep-alive')))
 		if info.getheader('link'):
-			print "Link: {}".format(info.getheader('link'))
+			print("Link: {}".format(info.getheader('link')))
 		if info.getheader('x-pingback'):
-			print "X-Pingback: {}".format(info.getheader('x-pingback'))
+			print("X-Pingback: {}".format(info.getheader('x-pingback')))
 		if info.getheader('cf-ray'):
-			print "CF-RAY: {}".format(info.getheader('cf-ray'))
+			print("CF-RAY: {}".format(info.getheader('cf-ray')))
 		if info.getheader('cookie'):
-			print "Cookie: {}".format(info.getheader('cookie'))
+			print("Cookie: {}".format(info.getheader('cookie')))
 		if info.getheader('x-mod-pagespeed'):
-			print "X-Mod-Pagespeed: {}".format(info.getheader('x-mod-pagespeed'))
+			print("X-Mod-Pagespeed: {}".format(info.getheader('x-mod-pagespeed')))
 		if info.getheader('x-powered-by'):
-			print  "X-Powered-By: {}".format(info.getheader('x-powered-by'))
+			print("X-Powered-By: {}".format(info.getheader('x-powered-by')))
 		if info.getheader('x-xss-protection'):
-			print "X-Xss-Protection: {}".format(info.getheader('x-xss-protection'))
-		print ""
+			print( "X-Xss-Protection: {}".format(info.getheader('x-xss-protection')))
+		print ("")
 
 	def wpconfig(self):
 		# Check wp-config.php 
@@ -212,7 +212,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url)
 			if html and code == 200:
 				self.print_.aprint("wp-config available under: %s"%(uri))
-		except Exception,e:
+		except Exception:
 			pass
 
 	def wpconfigbackup(self):
@@ -225,7 +225,7 @@ class WPGeneric:
 				html,uri,code,info = self.req.Send(url)
 				if html and code == 200:
 					self.print_.bprint("wp-config backup available under: %s"%(uri))
-			except Exception,e:
+			except Exception:
 				pass 
 
 	def wpconfigsm(self):
@@ -236,7 +236,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url)
 			if html and code == 500:
 				self.print_.bprint("wp-config-sample available under: %s"%(uri))
-		except Exception,e:
+		except Exception:
 			pass
 
 	def dirlisting(self):
@@ -249,7 +249,7 @@ class WPGeneric:
 				html,uri,code,info = self.req.Send(url)
 				if re.search("Index of",html) and code == 200:
 					self.print_.bprint("Dir {} listing enabled under: {}".format(x,uri))
-			except Exception,e:
+			except Exception:
 				pass
 
 	def license(self):
@@ -262,7 +262,7 @@ class WPGeneric:
 				html,uri,code,info = self.req.Send(url)
 				if html and code == 200:
 					self.print_.aprint("License available under: %s"%(uri))
-			except Exception,e:
+			except Exception:
 				pass
 
 	def pingback(self):
@@ -277,7 +277,7 @@ class WPGeneric:
 			html,uri,code,info = self.req.Send(url,method="POST",payload=payload)
 			if re.search("<name>16</name>",html) and code==200:
 				self.print_.bprint("Website vulnerable to XML-RPC Pingback Force Vulneravility")
-		except Exception,e:
+		except Exception:
 			pass
 
 	def wpvulns(self,ver):
@@ -304,12 +304,12 @@ class WPGeneric:
 						for z in range(len(jso[str(ver[0])]["vulnerabilities"][x]["references"]["url"])):
 							self.print_.dprint("Reference: %s"%(jso[str(ver[0])]["vulnerabilities"][x]["references"]["url"][z]))
 					self.print_.dprint("Fixed in: %s"%(jso[str(ver[0])]["vulnerabilities"][x]["fixed_in"]))
-					print ""
+					print("")
 			else:
 				self.print_.eprint("Not found vulnerabilities")
 				print 
-		except Exception,e:
-			print e 
+		except Exception:
+			print 
 
 	def init(self):
 		self.sitemap()

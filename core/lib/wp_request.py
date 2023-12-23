@@ -3,10 +3,10 @@
 # WPSeku - Wordpress Security Scanner 
 # Coded by Momo Outaadi (@M4ll0k) (C) 2017
 
-import urllib2
-import wp_print
+import urllib
+from . import wp_print
 import sys
-import wp_checker
+from . import wp_checker
 
 class WPRequest:
 	"""Connection Class"""
@@ -24,39 +24,40 @@ class WPRequest:
 		if headers is None: headers = {}
 		# add user_agent 
 		headers['User-agent'] = self.agent
-		handlers = [urllib2.HTTPHandler(),urllib2.HTTPSHandler()]
+		handlers = [urllib.request.HTTPHandler(),urllib.request.HTTPSHandler()]
 		# Set cookies
 		if cookie != None:
-			handlers.append(urllib2.HTTPCookieProcessor(cookie))
+			handlers.append(urllib.request.HTTPCookieProcessor(cookie))
 		# Set redirect
 		if self.redir == False:
-			handlers.append(NoRedirectHandler())
+			""
+			#handlers.append(NoRedirectHandler())
 		# Set proxy
 		if self.proxy:
 			proxies = {'http':self.proxy,'https':self.proxy}
-			handlers.append(urllib2.ProxyHandler(proxies))
+			handlers.append(urllib.parse.ProxyHandler(proxies))
 		# Set opener
-		opener = urllib2.build_opener(*handlers)
-		urllib2.install_opener(opener)
+		opener = urllib.request.build_opener(*handlers)
+		urllib.request.install_opener(opener)
 		# Method GET
 		if method == "GET":
 			if payload: url = "{}".format(Check().check(url,payload))
-			req = urllib2.Request(url,headers=headers)
+			req = urllib.request.Request(url,headers=headers)
 		# Method POST
 		if method == "POST":
-			req = urllib2.Request(url,data=payload,headers=headers)
+			req = urllib.request.Request(url,data=payload,headers=headers)
 
 		# Response
 		try:
-			resp = urllib2.urlopen(req)
-		except urllib2.HTTPError,e:
-			resp = e 
+			resp = urllib.request.urlopen(req)
+		except urllib.error.HTTPError():
+			resp = ""
 		return resp.read().decode('utf-8'),resp.geturl(),resp.getcode(),resp.info()
 
-class NoRedirectHandler(urllib2.HTTPRedirectHandler):
-	def http_error_302(self,req,fp,code,msg,headers):
-		pass 
-	http_error_302 = http_error_302 = http_error_302 = http_error_302
+# class NoRedirectHandler(urllib.request.HTTPRedirectHandler):
+# 	def http_error_302(self,req,fp,code,msg,headers):
+# 		pass 
+# 	http_error_302 = http_error_302 = http_error_302 = http_error_302
 
 class Check:
 	def check(self,url,path):

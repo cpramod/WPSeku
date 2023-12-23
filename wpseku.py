@@ -21,7 +21,7 @@ import sys
 import time
 import datetime
 import getopt
-import urlparse
+import urllib.parse
 from core.lib import wp_colors
 from core.lib import wp_print
 from core.lib import wp_info
@@ -60,33 +60,33 @@ class WPSeku(object):
 	def Usage(self):
 		wp_banner.Banner()
 		name = os.path.join(os.path.basename(sys.argv[0]))
-		print "Usage: {} [-t/--target] http://target.com\n".format(name)
-		print "\t-t --target\tTarget url (eg: http://target.com)"
-		print "\t-x --xss\tTesting Cross Site Scripting (xss) vulns"
-		print "\t-s --sql\tTesting SQL Injection (sql) vulns"
-		print "\t-l --lfi\tTesting Local File Inclusion (lfi) vulns"
-		print "\t-b --brute\tBruteforcing login, wp-login [l] or xmlrpc [x]"
-		print "\t-q --query\tTestable parameters (eg:\"id=1&file=2\")"
-		print "\t-u --user\tSet username for bruteforce, default=admin"
-		print "\t-w --wordlist\tSet wordlist (user:pass)"
-		print "\t-m --method\tSet method (GET or POST)"
-		print "\t-p --proxy\tSet proxy (host:port)"
-		print "\t-a --agent\tSet user-agent"
-		print "\t-c --cookie\tSet cookie"
-		print "\t-r --redirect\tRedirection target url, defaul=True"
-		print "\t-h --help\tShow this help and exit\n"		
-		print "Examples:"
-		print "\t{} -t http://www.target.com".format(name)
-		print "\t{} -t target.com/wp-admin/admin-ajax.php -q id=1&cat=2 -m POST [-x,-s,-l]".format(name)
-		print "\t{} -t target.com/path/wp-content/plugins/hello/hello.php -q id=1&test=2 -m GET [-x,-s,-l]".format(name)
-		print "\t{} -t http://target.com --brute [l,x] --user admin --wordlist dict.txt\n".format(name)
+		print("Usage: {} [-t/--target] http://target.com\n".format(name))
+		print( "\t-t --target\tTarget url (eg: http://target.com)")
+		print( "\t-x --xss\tTesting Cross Site Scripting (xss) vulns")
+		print ("\t-s --sql\tTesting SQL Injection (sql) vulns")
+		print ("\t-l --lfi\tTesting Local File Inclusion (lfi) vulns")
+		print( "\t-b --brute\tBruteforcing login, wp-login [l] or xmlrpc [x]")
+		print( "\t-q --query\tTestable parameters (eg:\"id=1&file=2\")")
+		print( "\t-u --user\tSet username for bruteforce, default=admin")
+		print( "\t-w --wordlist\tSet wordlist (user:pass)")
+		print( "\t-m --method\tSet method (GET or POST)")
+		print( "\t-p --proxy\tSet proxy (host:port)")
+		print( "\t-a --agent\tSet user-agent")
+		print( "\t-c --cookie\tSet cookie")
+		print( "\t-r --redirect\tRedirection target url, defaul=True")
+		print( "\t-h --help\tShow this help and exit\n"		)
+		print( "Examples:")
+		print( "\t{} -t http://www.target.com".format(name))
+		print( "\t{} -t target.com/wp-admin/admin-ajax.php -q id=1&cat=2 -m POST [-x,-s,-l]".format(name))
+		print( "\t{} -t target.com/path/wp-content/plugins/hello/hello.php -q id=1&test=2 -m GET [-x,-s,-l]".format(name))
+		print( "\t{} -t http://target.com --brute [l,x] --user admin --wordlist dict.txt\n".format(name))
 		sys.exit()
 
 	def CheckUrl(self,target):
 		# Check url 
-		scheme = urlparse.urlsplit(target).scheme.lower()
-		netloc = urlparse.urlsplit(target).netloc.lower()
-		path = urlparse.urlsplit(target).path.lower()
+		scheme = urllib.parse.urlsplit(target).scheme.lower()
+		netloc = urllib.parse.urlsplit(target).netloc.lower()
+		path = urllib.parse.urlsplit(target).path.lower()
 		if scheme not in ["http","https",""]:
 			sys.exit(self.print_.bprint("Scheme %s not supported!! Check url"))
 		if netloc == "":
@@ -102,7 +102,7 @@ class WPSeku(object):
 		try:
 			opts,args = getopt.getopt(self.kwargs,"t:xsl=:b:q:u:w:m:p:a:c:r:h:",["target=","xss","sql","lfi","brute=",
 				"query=","user=","wordlist=","method=","proxy=","agent=","cookie=","redirect=","help","update"])
-		except getopt.error,e: 
+		except getopt.error: 
 			self.Usage()
 		# All opts
 		for opt,arg in opts:
@@ -139,10 +139,10 @@ class WPSeku(object):
 				self.Usage()
 
 		#############################################
-		wp_banner.Banner()
+		#wp_banner.Banner()
 		self.print_.aprint("Target: %s"%(self.url))
 		self.print_.aprint("Starting: %s"%(time.strftime('%d/%m/%Y %H:%M:%S')))
-		print ""
+		print("")
 		if not self.user_agent: self.user_agent = "Mozilla/5.0"
 		if not self.proxy: self.proxy = None
 		if not self.redirect: self.redirect = False

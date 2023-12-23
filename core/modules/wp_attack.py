@@ -27,7 +27,7 @@ class WPAttack:
 	def xss(self):
 		# Simple testing xss vulns
 		self.print_.aprint("Testing xss vulns...")
-		print ""
+		print("")
 		# self.payload ==> {'id':2,'cat':2}
 		params = dict([x.split("=") for x in self.payload.split("&")])
 		param = {}
@@ -47,12 +47,12 @@ class WPAttack:
 					html,uri,code,info = self.req.Send(url,self.method,enparam)
 					# search payload in html
 					if re.search(x[0],html) and code == 200:
-						print "%s[%s][%s][vuln]%s %s"%(wp_colors.WPColors().red(1),code,self.method,wp_colors.WPColors().end(),uri)
+						print("%s[%s][%s][vuln]%s %s"%(wp_colors.WPColors().red(1),code,self.method,wp_colors.WPColors().end(),uri))
 					else:
-						print "%s[%s][%s][not vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri)
+						print("%s[%s][%s][not vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri))
 					# return original data 
 					param[item[0]] = item[1].replace(x[0],item[1])
-		except Exception,err:
+		except Exception:
 			pass
 		sys.exit()
 
@@ -101,7 +101,7 @@ class WPAttack:
 	def sql(self):
 		# Simple testing sql vulns
 		self.print_.aprint("Testing sql injection vulns...")
-		print ""
+		print("")
 		# self.payload ==> {'id':2,'cat':2}
 		params = dict([x.split("=") for x in self.payload.split("&")])
 		param = {}
@@ -121,19 +121,19 @@ class WPAttack:
 					# return from db error 
 					data = self.dberror(html)
 					if data != None:
-						print "%s[%s][%s][%s]%s %s"%(wp_colors.WPColors().red(1),code,self.method,data,wp_colors.WPColors().end(),uri)
+						print("%s[%s][%s][%s]%s %s"%(wp_colors.WPColors().red(1),code,self.method,data,wp_colors.WPColors().end(),uri))
 					else:
-						print "%s[%s][%s][Not vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri)
+						print("%s[%s][%s][Not vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri))
 					# return original data 
 					param[item[0]] = item[1].replace(x[0],item[1])
-		except Exception,err:
+		except Exception:
 			pass
 		sys.exit()
 
 	def lfi(self):
 		# Simple testing lfi vulns
 		self.print_.aprint("Testing lfi vulns...")
-		print ""
+		print("")
 		# self.payload ==> {'id':2,'cat':2}
 		params = dict([x.split("=") for x in self.payload.split("&")])
 		param = {}
@@ -152,10 +152,10 @@ class WPAttack:
 					# return data,url,code and headers
 					html,uri,code,info = self.req.Send(url,self.method,enparam)
 					if re.search("define (\W+\w+\W+\w+\W+\w)*",html) and code == 200:
-						print "[%s][%s][Vuln] %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri)
+						print("[%s][%s][Vuln] %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri))
 					else:
-						print "%s[%s][%s][Not Vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri)
+						print("%s[%s][%s][Not Vuln]%s %s"%(wp_colors.WPColors().green(1),code,self.method,wp_colors.WPColors().end(),uri))
 					param[item[0]] = item[1].replace(x[0],item[1])
-		except Exception,err:
+		except Exception:
 			pass
 		sys.exit()
