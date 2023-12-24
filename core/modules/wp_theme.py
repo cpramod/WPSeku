@@ -43,7 +43,7 @@ class WPTheme:
 					self.changelog(new[x])
 					self.fullpathdisc(new[x])
 					self.style(new[x])
-					self.thvulns(new[x])
+					#self.thvulns(new[x])
 			else:
 				self.print_.eprint("Not found themes!")
 		except Exception:

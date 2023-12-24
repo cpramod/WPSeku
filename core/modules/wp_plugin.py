@@ -37,10 +37,10 @@ class WPPlugin:
 			if nplugin != []:
 				for c in range(len(nplugin)):
 					self.print_.dprint("Name: %s - %s"%(nplugin[c],self.vers(nplugin[c])))
-					self.readme(nplugin[c])
-					self.changelog(nplugin[c])
-					self.dirlisting(nplugin[c])
-					self.plvulns(nplugin[c])
+					#self.readme(nplugin[c])
+					#self.changelog(nplugin[c])
+					#self.dirlisting(nplugin[c])
+					#self.plvulns(nplugin[c])
 			else:
 				self.print_.eprint("Not found plugins!")
 		except Exception:

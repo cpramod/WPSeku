@@ -174,34 +174,35 @@ class WPGeneric:
 		# return html,url,code and info
 		html,uri,code,info = self.req.Send(url)
 		print("")
-		if info.getheader('content-encoding'):
-			print("Content-Encoding: {}".format(info.getheader('content-encoding')))
-		if info.getheader('content-length'):
-			print("Content-Length: {}".format(info.getheader('content-length')))
-		if info.getheader('connection'):
-			print("Connection: {}".format(info.getheader('connection')))
-		if info.getheader('content-type'):
-			print("Content-Type: {}".format(info.getheader('content-type')))
-		if info.getheader('cache-control'):
-			print("Cache-Control: {}".format(info.getheader('cache-control')))
-		if info.getheader('server'):
-			print("Server: {}".format(info.getheader('server')))
-		if info.getheader('keep-alive'):
-			print("Keep-Alive: {}".format(info.getheader('keep-alive')))
-		if info.getheader('link'):
-			print("Link: {}".format(info.getheader('link')))
-		if info.getheader('x-pingback'):
-			print("X-Pingback: {}".format(info.getheader('x-pingback')))
-		if info.getheader('cf-ray'):
-			print("CF-RAY: {}".format(info.getheader('cf-ray')))
-		if info.getheader('cookie'):
-			print("Cookie: {}".format(info.getheader('cookie')))
-		if info.getheader('x-mod-pagespeed'):
-			print("X-Mod-Pagespeed: {}".format(info.getheader('x-mod-pagespeed')))
-		if info.getheader('x-powered-by'):
-			print("X-Powered-By: {}".format(info.getheader('x-powered-by')))
-		if info.getheader('x-xss-protection'):
-			print( "X-Xss-Protection: {}".format(info.getheader('x-xss-protection')))
+		print(info.get_all('content-encoding'))
+		if info.get_all('content-encoding'):
+			print("Content-Encoding: {}".format(info.get_all('content-encoding')))
+		if info.get_all('content-length'):
+			print("Content-Length: {}".format(info.get_all('content-length')))
+		if info.get_all('connection'):
+			print("Connection: {}".format(info.get_all('connection')))
+		if info.get_all('content-type'):
+			print("Content-Type: {}".format(info.get_all('content-type')))
+		if info.get_all('cache-control'):
+			print("Cache-Control: {}".format(info.get_all('cache-control')))
+		if info.get_all('server'):
+			print("Server: {}".format(info.get_all('server')))
+		if info.get_all('keep-alive'):
+			print("Keep-Alive: {}".format(info.get_all('keep-alive')))
+		if info.get_all('link'):
+			print("Link: {}".format(info.get_all('link')))
+		if info.get_all('x-pingback'):
+			print("X-Pingback: {}".format(info.get_all('x-pingback')))
+		if info.get_all('cf-ray'):
+			print("CF-RAY: {}".format(info.get_all('cf-ray')))
+		if info.get_all('cookie'):
+			print("Cookie: {}".format(info.get_all('cookie')))
+		if info.get_all('x-mod-pagespeed'):
+			print("X-Mod-Pagespeed: {}".format(info.get_all('x-mod-pagespeed')))
+		if info.get_all('x-powered-by'):
+			print("X-Powered-By: {}".format(info.get_all('x-powered-by')))
+		if info.get_all('x-xss-protection'):
+			print( "X-Xss-Protection: {}".format(info.get_all('x-xss-protection')))
 		print ("")
 
 	def wpconfig(self):
